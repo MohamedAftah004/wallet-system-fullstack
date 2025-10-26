@@ -56,7 +56,6 @@ It follows a **modular feature-based structure**, making it scalable, maintainab
 
 ### 1️⃣ Install Dependencies
 
-```bash
 npm install
 2️⃣ Run the Development Server
 bash
@@ -134,4 +133,3 @@ Frontend & Backend Developer (Angular / .NET / Clean Architecture)
 🔗 [GitHub](https://github.com/MohamedAftah004)
 🔗 [LinkedIn](https://www.linkedin.com/in/mabd-elfattah/)
 
-```
