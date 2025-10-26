@@ -1,0 +1,97 @@
+<div class="admin-layout">
+  <app-admin-sidebar></app-admin-sidebar>
+
+  <div class="admin-content">
+    <section class="reports-container">
+      <!-- ===== Header ===== -->
+      <header class="reports-header">
+        <div>
+          <h1 class="title">📊 Reports Center</h1>
+          <p class="subtitle">Insightful overview of your platform performance</p>
+        </div>
+
+        <button class="refresh-btn" (click)="fetchReports()">⟳ Refresh</button>
+      </header>
+
+      <!-- ===== KPI Cards ===== -->
+      <section class="report-cards">
+        <div class="report-card users">
+          <div class="icon">👥</div>
+          <div class="info">
+            <p>Total Users</p>
+            <h3>{{ totalUsers }}</h3>
+          </div>
+        </div>
+
+        <div class="report-card transactions">
+          <div class="icon">💳</div>
+          <div class="info">
+            <p>Total Transactions</p>
+            <h3>{{ totalTransactions }}</h3>
+          </div>
+        </div>
+
+        <div class="report-card balance">
+          <div class="icon">💰</div>
+          <div class="info">
+            <p>Total Balance</p>
+            <h3>{{ totalBalance | number }} EGP</h3>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== Data Table ===== -->
+      <section class="table-section">
+        <div class="table-header">
+          <h2>🧾 Latest User Reports</h2>
+          <div class="filters">
+            <label>Status:</label>
+            <select [(ngModel)]="filterStatus" (change)="applyFilter()">
+              <option value="all">All</option>
+              <option value="Active">Active</option>
+              <option value="Blocked">Blocked</option>
+            </select>
+          </div>
+        </div>
+
+        <table
+          class="report-table"
+          *ngIf="!loading && filteredUsers.length > 0; else loadingOrEmpty"
+        >
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Full Name</th>
+              <th>Email</th>
+              <th>Status</th>
+              <th>Created</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let user of filteredUsers; let i = index">
+              <td>{{ i + 1 }}</td>
+              <td>{{ user.fullName }}</td>
+              <td>{{ user.email }}</td>
+              <td>
+                <span
+                  class="status"
+                  [class.active]="user.status === 'Active'"
+                  [class.blocked]="user.status !== 'Active'"
+                >
+                  {{ user.status }}
+                </span>
+              </td>
+              <td>{{ user.createdAt | date : 'short' }}</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <ng-template #loadingOrEmpty>
+          <p class="placeholder">
+            {{ loading ? 'Loading reports...' : 'No data available.' }}
+          </p>
+        </ng-template>
+      </section>
+    </section>
+  </div>
+</div>

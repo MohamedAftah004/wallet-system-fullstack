@@ -1,0 +1,55 @@
+<div class="transactions-container">
+  <h2>💸 My Transactions</h2>
+
+  <div *ngIf="loading" class="loading">Loading transactions...</div>
+
+  <div *ngIf="!loading && errorMessage" class="error">
+    {{ errorMessage }}
+  </div>
+
+  <div class="table-wrapper" *ngIf="!loading && transactions.length > 0">
+    <table class="transactions-table">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Type</th>
+          <th>Status</th>
+          <th>Amount</th>
+          <th>Currency</th>
+          <th>Description</th>
+          <th>Date</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let tx of transactions; let i = index">
+          <td>{{ (currentPage - 1) * pageSize + i + 1 }}</td>
+          <td>{{ tx.type }}</td>
+          <td [ngClass]="tx.status?.toLowerCase()">{{ tx.status }}</td>
+          <td>{{ tx.amount }}</td>
+          <td>{{ tx.currencyCode }}</td>
+          <td>{{ tx.description }}</td>
+          <td>{{ tx.createdAt | date : 'short' }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div *ngIf="!loading && transactions.length === 0 && !errorMessage" class="no-data">
+    🕊️ No transactions found.
+  </div>
+
+  <!-- Pagination -->
+  <div *ngIf="totalPages > 1" class="pagination">
+    <button (click)="changePage(currentPage - 1)" [disabled]="currentPage === 1">⬅️ Prev</button>
+
+    <ng-container *ngFor="let page of [].constructor(totalPages); let i = index">
+      <button [class.active]="currentPage === i + 1" (click)="changePage(i + 1)">
+        {{ i + 1 }}
+      </button>
+    </ng-container>
+
+    <button (click)="changePage(currentPage + 1)" [disabled]="currentPage === totalPages">
+      Next ➡️
+    </button>
+  </div>
+</div>

@@ -1,0 +1,49 @@
+<div class="modal-backdrop" *ngIf="visible" (click)="close.emit()"></div>
+
+<div class="modal" *ngIf="visible">
+  <div class="modal-header">
+    <div class="user-icon">🧑‍💼</div>
+    <div class="user-info">
+      <h2>{{ user?.fullName }}</h2>
+      <p>{{ user?.email }}</p>
+    </div>
+    <button class="close-btn" (click)="close.emit()">×</button>
+  </div>
+
+  <div class="modal-body">
+    <div class="info-grid">
+      <div class="info-item">
+        <span class="label">📱 Phone</span>
+        <span class="value">{{ user?.phoneNumber || '-' }}</span>
+      </div>
+
+      <div class="info-item">
+        <span class="label">💼 Status</span>
+        <span
+          class="value status"
+          [class.active]="user?.status === 'Active'"
+          [class.blocked]="user?.status === 'Blocked'"
+        >
+          {{ user?.status }}
+        </span>
+      </div>
+
+      <div class="info-item">
+        <span class="label">💰 Balance</span>
+        <span class="value">{{ user?.balance | number : '1.0-2' }} EGP</span>
+      </div>
+
+      <div class="info-item">
+        <span class="label">🕒 Created At</span>
+        <span class="value">{{ user?.createdAt | date : 'short' }}</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-footer">
+    <button class="btn activate" (click)="emitAction('activate')">Activate</button>
+    <button class="btn freeze" (click)="emitAction('freeze')">Freeze</button>
+    <button class="btn disable" (click)="emitAction('disable')">Disable</button>
+    <button class="btn close" (click)="emitAction('close')">Close</button>
+  </div>
+</div>

@@ -1,0 +1,53 @@
+<div class="admin-dashboard">
+  <app-admin-sidebar></app-admin-sidebar>
+
+  <main class="dashboard-main">
+    <header class="dashboard-header">
+      <div class="header-left">
+        <h1>Admin Overview</h1>
+        <p class="subtitle">Real-time stats and system insights</p>
+      </div>
+
+      <div class="header-right">
+        <button class="refresh-btn" (click)="loadDashboardStats()">↻ Refresh</button>
+      </div>
+    </header>
+
+    <section class="stats-section" *ngIf="!loading && !errorMessage">
+      <div class="stat-card users">
+        <div class="icon">👥</div>
+        <div>
+          <h3>{{ totalUsers }}</h3>
+          <p>Total Users</p>
+        </div>
+      </div>
+
+      <div class="stat-card active">
+        <div class="icon">✅</div>
+        <div>
+          <h3>{{ activeUsers }}</h3>
+          <p>Active Accounts</p>
+        </div>
+      </div>
+
+      <div class="stat-card transactions">
+        <div class="icon">💸</div>
+        <div>
+          <h3>{{ totalTransactions }}</h3>
+          <p>Transactions</p>
+        </div>
+      </div>
+
+      <div class="stat-card balance">
+        <div class="icon">💰</div>
+        <div>
+          <h3>{{ totalBalance | number }}</h3>
+          <p>Total Balance</p>
+        </div>
+      </div>
+    </section>
+
+    <div *ngIf="loading" class="loading">Loading dashboard...</div>
+    <div *ngIf="errorMessage" class="error">{{ errorMessage }}</div>
+  </main>
+</div>

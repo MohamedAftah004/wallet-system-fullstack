@@ -1,0 +1,78 @@
+<div class="dashboard" *ngIf="!loading && dashboardData; else loadingOrError">
+  <header class="dashboard-header">
+    <div class="greeting">
+      <h1>👋 Welcome back, {{ dashboardData.fullName }}</h1>
+      <p>Your digital wallet overview</p>
+
+      <!-- 💬 حالة الحساب -->
+      <div
+        *ngIf="userStatusMessage"
+        [ngClass]="['status-banner', userStatusClass]"
+        [innerHTML]="userStatusMessage"
+      ></div>
+    </div>
+
+    <div class="balance">
+      <span>Wallet Balance</span>
+      <h2>{{ dashboardData.walletBalance | currency : 'EGP' }}</h2>
+    </div>
+  </header>
+
+  <section class="stats">
+    <div class="card">
+      <h3>Total Transactions</h3>
+      <p>{{ dashboardData.totalTransactions }}</p>
+    </div>
+    <div class="card completed">
+      <h3>Completed</h3>
+      <p>{{ dashboardData.completedTransactions }}</p>
+    </div>
+    <div class="card pending">
+      <h3>Pending</h3>
+      <p>{{ dashboardData.pendingTransactions }}</p>
+    </div>
+  </section>
+
+  <section class="recent-transactions">
+    <h2>🧾 Recent Transactions</h2>
+
+    <table *ngIf="dashboardData.recentTransactions?.length; else noData">
+      <thead>
+        <tr>
+          <th>Description</th>
+          <th>Type</th>
+          <th>Status</th>
+          <th>Amount</th>
+          <th>Date</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let tx of dashboardData.recentTransactions">
+          <td>{{ tx.description }}</td>
+          <td>{{ tx.type }}</td>
+          <td>
+            <span
+              class="status"
+              [class.completed]="tx.status === 'Completed'"
+              [class.pending]="tx.status === 'Pending'"
+              [class.reversed]="tx.status === 'Reversed'"
+            >
+              {{ tx.status }}
+            </span>
+          </td>
+          <td>{{ tx.amount }} {{ tx.currencyCode }}</td>
+          <td>{{ tx.createdAt | date : 'short' }}</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <ng-template #noData>
+      <p class="no-data">No transactions found.</p>
+    </ng-template>
+  </section>
+</div>
+
+<ng-template #loadingOrError>
+  <div class="loading" *ngIf="loading">Loading dashboard...</div>
+  <div class="error" *ngIf="!loading && errorMessage">{{ errorMessage }}</div>
+</ng-template>

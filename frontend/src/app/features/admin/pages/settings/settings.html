@@ -1,0 +1,54 @@
+<div class="admin-layout">
+  <app-admin-sidebar></app-admin-sidebar>
+
+  <div class="admin-content">
+    <div class="settings-wrapper">
+      <h1 class="title">⚙️ Admin Settings</h1>
+      <p class="subtitle">Manage your account, security, and preferences</p>
+
+      <div class="settings-sections">
+        <!-- Profile Section -->
+        <section class="settings-card">
+          <h2><i class="fa-regular fa-user"></i> Profile Settings</h2>
+          <form [formGroup]="profileForm" (ngSubmit)="saveProfile()">
+            <div class="form-group">
+              <label>Full Name</label>
+              <input formControlName="fullName" type="text" placeholder="Enter your name" />
+            </div>
+            <div class="form-group">
+              <label>Email</label>
+              <input formControlName="email" type="email" placeholder="Enter your email" />
+            </div>
+            <button class="btn-primary" type="submit">💾 Save Profile</button>
+          </form>
+        </section>
+
+        <!-- Security Section -->
+        <section class="settings-card">
+          <h2><i class="fa-solid fa-lock"></i> Security</h2>
+          <form [formGroup]="securityForm" (ngSubmit)="saveSecurity()">
+            <div class="form-group">
+              <label>Current Password</label>
+              <input
+                formControlName="currentPassword"
+                type="password"
+                placeholder="Enter current password"
+              />
+            </div>
+            <div class="form-group">
+              <label>New Password</label>
+              <input
+                formControlName="newPassword"
+                type="password"
+                placeholder="Enter new password"
+              />
+            </div>
+            <button class="btn-primary" type="submit">🔑 Update Password</button>
+          </form>
+        </section>
+
+        <div class="message" *ngIf="message">{{ message }}</div>
+      </div>
+    </div>
+  </div>
+</div>

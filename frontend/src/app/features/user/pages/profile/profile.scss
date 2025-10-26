@@ -1,0 +1,229 @@
+.profile-page {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #0b0f14, #111a22, #0d141a);
+  color: #fff;
+  font-family: 'Poppins', sans-serif;
+  padding: 40px 60px;
+  position: relative;
+  overflow: hidden;
+
+  /* 🔮 لمسات الإضاءة */
+  &::before,
+  &::after {
+    content: '';
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(130px);
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  &::before {
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(40, 199, 111, 0.25), transparent 70%);
+    top: -100px;
+    right: -150px;
+  }
+
+  &::after {
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, rgba(72, 219, 177, 0.15), transparent 70%);
+    bottom: -100px;
+    left: -150px;
+  }
+
+  /* 👤 Profile Header */
+  .profile-header {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding-bottom: 30px;
+    margin-bottom: 40px;
+
+    .user-info {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+
+      .avatar {
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, #28c76f, #48dbb1);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 34px;
+        font-weight: 600;
+        color: #fff;
+        box-shadow: 0 0 25px rgba(40, 199, 111, 0.4);
+      }
+
+      h1 {
+        margin: 0;
+        font-size: 28px;
+        background: linear-gradient(90deg, #48dbb1, #28c76f);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+
+      p {
+        color: #b8c2cc;
+        font-size: 15px;
+        margin-top: 4px;
+      }
+    }
+
+    .status {
+      padding: 8px 16px;
+      border-radius: 20px;
+      font-weight: 600;
+      font-size: 14px;
+      text-transform: capitalize;
+
+      &.active {
+        background: rgba(40, 199, 111, 0.2);
+        color: #28c76f;
+      }
+
+      &.blocked {
+        background: rgba(255, 107, 107, 0.2);
+        color: #ff6b6b;
+      }
+
+      &.pending {
+        background: rgba(255, 193, 7, 0.2);
+        color: #ffc107;
+      }
+    }
+  }
+
+  /* 🧾 Profile Content */
+  .profile-content {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    position: relative;
+    z-index: 2;
+
+    section {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.07);
+      border-radius: 18px;
+      padding: 35px;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 6px 25px rgba(0, 0, 0, 0.4);
+
+      h2 {
+        color: #48dbb1;
+        margin-bottom: 25px;
+        font-size: 20px;
+        border-left: 4px solid #28c76f;
+        padding-left: 12px;
+        font-weight: 600;
+      }
+
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+        gap: 25px;
+
+        label {
+          color: #aaa;
+          font-size: 14px;
+          display: block;
+          margin-bottom: 6px;
+        }
+
+        p {
+          font-size: 17px;
+          font-weight: 500;
+          color: #fff;
+        }
+      }
+
+      /* ⚙️ Account Section */
+      .overview-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+        gap: 25px;
+
+        .card {
+          background: rgba(255, 255, 255, 0.06);
+          border-radius: 14px;
+          padding: 28px;
+          transition: 0.3s ease;
+          border: 1px solid rgba(255, 255, 255, 0.07);
+
+          &:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-4px);
+            box-shadow: 0 6px 25px rgba(40, 199, 111, 0.2);
+          }
+
+          h3 {
+            color: #28c76f;
+            font-size: 18px;
+            margin-bottom: 10px;
+          }
+
+          p {
+            color: #b8c2cc;
+            margin-bottom: 14px;
+          }
+
+          .btn {
+            background: linear-gradient(135deg, #28c76f, #48dbb1);
+            border: none;
+            color: #fff;
+            padding: 10px 16px;
+            border-radius: 10px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.3s;
+
+            &:hover {
+              box-shadow: 0 0 15px rgba(40, 199, 111, 0.4);
+              transform: translateY(-2px);
+            }
+          }
+        }
+      }
+    }
+  }
+
+  /* ⏳ Loading & Error */
+  .loading,
+  .error {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    margin-top: 60px;
+    font-size: 18px;
+    font-weight: 500;
+  }
+
+  .error {
+    color: #ff6b6b;
+  }
+
+  /* 📱 Responsive */
+  @media (max-width: 768px) {
+    padding: 30px 20px;
+
+    .profile-header {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 20px;
+    }
+
+    .profile-content section {
+      padding: 25px;
+    }
+  }
+}

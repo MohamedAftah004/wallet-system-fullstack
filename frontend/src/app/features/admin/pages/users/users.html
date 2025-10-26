@@ -1,0 +1,88 @@
+<div class="admin-layout">
+  <app-admin-sidebar></app-admin-sidebar>
+
+  <main class="admin-users">
+    <header class="page-header">
+      <div class="header-left">
+        <h1>👥 Users Management</h1>
+        <p>Manage, review and control your system’s user accounts</p>
+      </div>
+      <button class="refresh-btn" (click)="loadUsers()">↻ Refresh</button>
+    </header>
+
+    <section class="stats-grid">
+      <div class="stat-card total">
+        <div class="icon">👨🏼‍💼</div>
+        <div>
+          <h3>{{ totalUsers }}</h3>
+          <p>Total Users</p>
+        </div>
+      </div>
+      <div class="stat-card active">
+        <div class="icon">✅</div>
+        <div>
+          <h3>{{ activeUsers }}</h3>
+          <p>Active</p>
+        </div>
+      </div>
+      <div class="stat-card blocked">
+        <div class="icon">⛔</div>
+        <div>
+          <h3>{{ blockedUsers }}</h3>
+          <p>Blocked</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="table-wrapper">
+      <div class="table-header">
+        <h2>📋 Registered Users</h2>
+      </div>
+
+      <table *ngIf="!loading && users.length; else loadingOrEmpty">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Full Name</th>
+            <th>Email</th>
+            <th>Status</th>
+            <th>Balance</th>
+            <th>Created At</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let user of users; let i = index" (click)="openUserDetails(user)">
+            <td>{{ i + 1 }}</td>
+            <td>{{ user.fullName }}</td>
+            <td>{{ user.email }}</td>
+            <td>
+              <span
+                class="status"
+                [class.active]="user.status === 'Active'"
+                [class.blocked]="user.status === 'Blocked'"
+              >
+                {{ user.status }}
+              </span>
+            </td>
+            <td>{{ user.balance | number : '1.0-2' }} EGP</td>
+            <td>{{ user.createdAt | date : 'short' }}</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <ng-template #loadingOrEmpty>
+        <p class="placeholder">
+          {{ loading ? 'Loading users...' : 'No users found.' }}
+        </p>
+      </ng-template>
+    </section>
+  </main>
+</div>
+
+<!-- Modal -->
+<app-user-details-modal
+  [visible]="selectedUser !== null"
+  [user]="selectedUser"
+  (close)="selectedUser = null"
+  (action)="handleUserAction($event)"
+></app-user-details-modal>

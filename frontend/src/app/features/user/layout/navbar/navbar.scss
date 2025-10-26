@@ -1,0 +1,115 @@
+.user-navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 40px;
+  background: rgba(20, 25, 30, 0.85);
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  color: #fff;
+  font-family: 'Poppins', sans-serif;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 25px rgba(0, 0, 0, 0.3);
+
+  /* 💼 Logo */
+  .logo {
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    color: #28c76f;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    text-shadow: 0 0 8px rgba(40, 199, 111, 0.4);
+    cursor: pointer;
+
+    &:hover {
+      text-shadow: 0 0 12px rgba(40, 199, 111, 0.7);
+    }
+  }
+
+  /* 🔗 Links */
+  .nav-links {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    gap: 35px;
+
+    li {
+      position: relative;
+      cursor: pointer;
+      font-weight: 500;
+      font-size: 15px;
+      color: #d1d5db;
+      transition: color 0.3s ease, transform 0.2s ease;
+
+      &:hover {
+        color: #48dbb1;
+        transform: translateY(-2px);
+      }
+
+      &.active {
+        color: #28c76f;
+        font-weight: 600;
+      }
+
+      /* ✨ خط تحت العنصر النشط */
+      &.active::after {
+        content: '';
+        position: absolute;
+        left: 0;
+        bottom: -5px;
+        width: 100%;
+        height: 2px;
+        background: linear-gradient(90deg, #28c76f, #48dbb1);
+        border-radius: 2px;
+        box-shadow: 0 0 8px rgba(40, 199, 111, 0.5);
+      }
+    }
+  }
+
+  /* 👤 User Info */
+  .user-info {
+    font-size: 14px;
+    color: #a0aec0;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: rgba(255, 255, 255, 0.05);
+    padding: 8px 14px;
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    transition: 0.3s;
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.1);
+      border-color: rgba(40, 199, 111, 0.3);
+      color: #fff;
+    }
+  }
+
+  /* 📱 Responsive */
+  @media (max-width: 800px) {
+    padding: 12px 24px;
+    flex-direction: column;
+    gap: 12px;
+
+    .nav-links {
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+    }
+
+    .logo {
+      font-size: 20px;
+    }
+
+    .user-info {
+      font-size: 13px;
+      padding: 6px 10px;
+    }
+  }
+}

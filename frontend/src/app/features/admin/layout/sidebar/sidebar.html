@@ -1,0 +1,44 @@
+<nav class="admin-sidebar" [class.open]="isOpen">
+  <div class="sidebar-header">
+    <div class="logo">
+      💳 <span>Wallet <strong>Admin</strong></span>
+    </div>
+    <button class="close-btn" (click)="toggleSidebar()">✖</button>
+  </div>
+
+  <ul class="nav-links">
+    <li>
+      <a routerLink="/admin/dashboard" routerLinkActive="active">
+        <i class="fa-solid fa-chart-line"></i> <span>Dashboard</span>
+      </a>
+    </li>
+    <li>
+      <a routerLink="/admin/users" routerLinkActive="active">
+        <i class="fa-solid fa-users"></i> <span>Users</span>
+      </a>
+    </li>
+    <li>
+      <a routerLink="/admin/transactions" routerLinkActive="active">
+        <i class="fa-solid fa-money-bill-transfer"></i> <span>Transactions</span>
+      </a>
+    </li>
+    <li>
+      <a routerLink="/admin/reports" routerLinkActive="active">
+        <i class="fa-solid fa-file-lines"></i> <span>Reports</span>
+      </a>
+    </li>
+    <li>
+      <a routerLink="/admin/settings" routerLinkActive="active">
+        <i class="fa-solid fa-gear"></i> <span>Settings</span>
+      </a>
+    </li>
+  </ul>
+
+  <div class="sidebar-footer" (click)="logout()">
+    <i class="fa-solid fa-right-from-bracket"></i>
+    <span>Logout</span>
+  </div>
+</nav>
+
+<!-- زر الفتح في الموبايل -->
+<button class="menu-toggle" (click)="toggleSidebar()">☰</button>

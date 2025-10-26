@@ -1,0 +1,39 @@
+<div class="payment-container">
+  <h2>Make a Payment</h2>
+
+  <!-- 🔔 حالة الحساب -->
+  <div *ngIf="isDisabled" class="account-status" [innerHTML]="errorMessage"></div>
+
+  <!-- 💳 نموذج الدفع -->
+  <form (ngSubmit)="makePayment()" class="payment-form" [class.disabled]="isDisabled">
+    <fieldset [disabled]="isDisabled">
+      <div class="form-group">
+        <label>💰 Amount (EGP)</label>
+        <input
+          type="number"
+          [(ngModel)]="amount"
+          name="amount"
+          placeholder="Enter amount"
+          required
+          min="1"
+        />
+      </div>
+
+      <div class="form-group">
+        <label>📝 Description</label>
+        <input
+          type="text"
+          [(ngModel)]="description"
+          name="description"
+          placeholder="What is this payment for?"
+        />
+      </div>
+
+      <button type="submit" [disabled]="loading || isDisabled">
+        {{ loading ? 'Processing...' : 'Send Payment' }}
+      </button>
+    </fieldset>
+  </form>
+
+  <div *ngIf="successMessage" class="success">{{ successMessage }}</div>
+</div>

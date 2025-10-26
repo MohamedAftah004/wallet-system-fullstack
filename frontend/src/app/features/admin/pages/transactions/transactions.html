@@ -1,0 +1,81 @@
+<div class="admin-layout">
+  <app-admin-sidebar></app-admin-sidebar>
+
+  <div class="admin-content">
+    <section class="transactions-section">
+      <div class="header">
+        <div>
+          <h1 class="title">💸 Transactions Overview</h1>
+          <p class="subtitle">Monitor all wallet activity and transaction flow</p>
+        </div>
+        <button class="refresh-btn" (click)="reloadTransactions()">⟳ Refresh</button>
+      </div>
+
+      <div class="stats">
+        <div class="stat-card total">
+          <div class="icon">🔁</div>
+          <div class="info">
+            <h3>{{ totalTransactions }}</h3>
+            <p>Total Transactions</p>
+          </div>
+        </div>
+
+        <div class="stat-card amount">
+          <div class="icon">💰</div>
+          <div class="info">
+            <h3>{{ totalAmount | number : '1.0-2' }} EGP</h3>
+            <p>Total Amount</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="table-wrapper">
+        <div class="table-header">
+          <h2>📊 Latest Transactions</h2>
+          <span class="count">{{ transactions.length }} records</span>
+        </div>
+
+        <table
+          *ngIf="!loading && transactions.length > 0; else loadingOrEmpty"
+          class="transactions-table"
+        >
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>User</th>
+              <th>Amount</th>
+              <th>Status</th>
+              <th>Date</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <tr *ngFor="let tx of transactions; let i = index">
+              <td>{{ i + 1 }}</td>
+              <td>{{ tx.userFullName || 'N/A' }}</td>
+              <td>{{ tx.amount | number : '1.2-2' }} EGP</td>
+              <td>
+                <span
+                  class="status"
+                  [class.completed]="tx.status === 'Completed'"
+                  [class.pending]="tx.status === 'Pending'"
+                  [class.failed]="tx.status === 'Failed'"
+                  [class.reversed]="tx.status === 'Reversed'"
+                >
+                  {{ tx.status }}
+                </span>
+              </td>
+              <td>{{ tx.createdAt | date : 'short' }}</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <ng-template #loadingOrEmpty>
+          <p class="placeholder">
+            {{ loading ? 'Loading transactions...' : 'No transactions found.' }}
+          </p>
+        </ng-template>
+      </div>
+    </section>
+  </div>
+</div>

@@ -1,0 +1,65 @@
+<div class="profile-page" *ngIf="!loading && userData; else loadingOrError">
+  <header class="profile-header">
+    <div class="user-info">
+      <div class="avatar">{{ userData.fullName.charAt(0).toUpperCase() }}</div>
+      <div>
+        <h1>{{ userData.fullName }}</h1>
+        <p>{{ userData.email }}</p>
+      </div>
+    </div>
+
+    <div
+      class="status"
+      [class.active]="userData.status === 'Active'"
+      [class.blocked]="userData.status === 'Blocked'"
+      [class.pending]="userData.status === 'PendingActivation'"
+    >
+      {{ userData.status }}
+    </div>
+  </header>
+
+  <main class="profile-content">
+    <section class="details">
+      <h2>Personal Information</h2>
+      <div class="grid">
+        <div>
+          <label>Full Name</label>
+          <p>{{ userData.fullName }}</p>
+        </div>
+        <div>
+          <label>Email</label>
+          <p>{{ userData.email }}</p>
+        </div>
+        <div>
+          <label>Phone Number</label>
+          <p>{{ userData.phoneNumber || 'N/A' }}</p>
+        </div>
+        <div>
+          <label>Created At</label>
+          <p>{{ userData.createdAt | date : 'medium' }}</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="account">
+      <h2>Account Overview</h2>
+      <div class="overview-grid">
+        <div class="card">
+          <h3>Transactions</h3>
+          <p>View your transaction history</p>
+          <button (click)="goToTransactions()" class="btn">Go to Transactions →</button>
+        </div>
+        <div class="card">
+          <h3>Payments</h3>
+          <p>Manage top-ups and withdrawals</p>
+          <button (click)="goToPayments()" class="btn">Go to Payments →</button>
+        </div>
+      </div>
+    </section>
+  </main>
+</div>
+
+<ng-template #loadingOrError>
+  <div class="loading" *ngIf="loading">Loading profile...</div>
+  <div class="error" *ngIf="!loading && errorMessage">{{ errorMessage }}</div>
+</ng-template>

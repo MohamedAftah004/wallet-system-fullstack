@@ -1,0 +1,117 @@
+.user-layout {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: radial-gradient(circle at 25% 15%, #0d1117, #141a22, #0b0f14);
+  color: #fff;
+  font-family: 'Poppins', sans-serif;
+  position: relative;
+  overflow-x: hidden;
+
+  /* ✨ خلفية ضوء ناعم */
+  &::before,
+  &::after {
+    content: '';
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(130px);
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  &::before {
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(40, 199, 111, 0.25), transparent 70%);
+    top: 10%;
+    right: -150px;
+    animation: floatGlow 8s ease-in-out infinite alternate;
+  }
+
+  &::after {
+    width: 450px;
+    height: 450px;
+    background: radial-gradient(circle, rgba(72, 219, 177, 0.2), transparent 70%);
+    bottom: 5%;
+    left: -120px;
+    animation: floatGlow 10s ease-in-out infinite alternate-reverse;
+  }
+
+  @keyframes floatGlow {
+    from {
+      transform: translateY(0);
+    }
+    to {
+      transform: translateY(20px);
+    }
+  }
+
+  /* 🧭 Navbar ثابت بالأعلى */
+  app-user-navbar {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+  }
+
+  /* 📦 المحتوى */
+  .user-content {
+    position: relative;
+    z-index: 2;
+    flex: 1;
+    padding: 40px 60px;
+    backdrop-filter: blur(4px);
+    animation: fadeIn 0.5s ease-in-out;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* 🧾 تخصيص لتنسيق صفحات الداشبورد */
+  .dashboard-card {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 16px;
+    padding: 25px 30px;
+    margin-bottom: 30px;
+    color: #fff;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease;
+
+    &:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 35px rgba(40, 199, 111, 0.25);
+    }
+
+    h3 {
+      font-size: 18px;
+      margin-bottom: 12px;
+      color: #48dbb1;
+      font-weight: 600;
+    }
+
+    p {
+      font-size: 14px;
+      color: #b3b3b3;
+      line-height: 1.6;
+    }
+  }
+
+  /* 📱 Responsive */
+  @media (max-width: 768px) {
+    .user-content {
+      padding: 24px 18px;
+    }
+
+    .dashboard-card {
+      padding: 18px 20px;
+    }
+  }
+}

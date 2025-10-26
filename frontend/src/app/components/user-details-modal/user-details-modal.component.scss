@@ -1,0 +1,154 @@
+.modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(15, 32, 39, 0.7);
+  backdrop-filter: blur(6px);
+  z-index: 999;
+}
+
+.modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 460px;
+  background: rgba(255, 255, 255, 0.07);
+  backdrop-filter: blur(20px);
+  border-radius: 16px;
+  padding: 25px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+  color: #fff;
+  z-index: 1000;
+  font-family: 'Poppins', sans-serif;
+  animation: fadeIn 0.25s ease-out;
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translate(-50%, -48%);
+    }
+    to {
+      opacity: 1;
+      transform: translate(-50%, -50%);
+    }
+  }
+
+  .modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+
+    .user-icon {
+      font-size: 34px;
+      background: rgba(72, 219, 177, 0.2);
+      border-radius: 50%;
+      padding: 10px;
+    }
+
+    .user-info {
+      flex: 1;
+      margin-left: 10px;
+
+      h2 {
+        margin: 0;
+        font-size: 20px;
+        color: #48dbb1;
+      }
+
+      p {
+        margin: 0;
+        color: #ccc;
+        font-size: 14px;
+      }
+    }
+
+    .close-btn {
+      background: none;
+      border: none;
+      font-size: 22px;
+      color: #fff;
+      cursor: pointer;
+      transition: color 0.3s;
+
+      &:hover {
+        color: #ff6b6b;
+      }
+    }
+  }
+
+  .modal-body {
+    margin-bottom: 25px;
+
+    .info-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 15px;
+
+      .info-item {
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: 10px;
+        padding: 12px;
+        text-align: center;
+
+        .label {
+          display: block;
+          color: #aaa;
+          font-size: 13px;
+          margin-bottom: 4px;
+        }
+
+        .value {
+          font-weight: 600;
+          color: #fff;
+        }
+
+        .status.active {
+          color: #28c76f;
+        }
+
+        .status.blocked {
+          color: #ff6b6b;
+        }
+      }
+    }
+  }
+
+  .modal-footer {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+
+    .btn {
+      flex: 1;
+      border: none;
+      border-radius: 10px;
+      padding: 10px 0;
+      font-weight: 600;
+      color: #fff;
+      cursor: pointer;
+      transition: 0.25s ease;
+
+      &.activate {
+        background: #28c76f;
+      }
+      &.freeze {
+        background: #48dbb1;
+      }
+      &.disable {
+        background: #ff6b6b;
+      }
+      &.close {
+        background: #6c757d;
+      }
+
+      &:hover {
+        transform: translateY(-2px);
+        opacity: 0.9;
+      }
+    }
+  }
+}

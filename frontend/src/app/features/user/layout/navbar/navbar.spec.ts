@@ -1,0 +1,22 @@
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+
+import { UserNavbarComponent } from './navbar';
+
+describe('Navbar', () => {
+  let component: UserNavbarComponent;
+  let fixture: ComponentFixture<UserNavbarComponent>;
+
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      imports: [UserNavbarComponent],
+    }).compileComponents();
+
+    fixture = TestBed.createComponent(UserNavbarComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  });
+
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
+});

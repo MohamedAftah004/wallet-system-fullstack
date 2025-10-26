@@ -1,0 +1,304 @@
+.dashboard {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #0b0f14 0%, #111a22 50%, #0d141a 100%);
+  color: #fff;
+  padding: 40px 60px;
+  font-family: 'Poppins', sans-serif;
+  position: relative;
+  overflow: hidden;
+
+  &::before,
+  &::after {
+    content: '';
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(140px);
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  &::before {
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(40, 199, 111, 0.25), transparent 70%);
+    top: -100px;
+    right: -150px;
+  }
+
+  &::after {
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, rgba(72, 219, 177, 0.15), transparent 70%);
+    bottom: -100px;
+    left: -150px;
+  }
+
+  .dashboard-header {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    flex-wrap: wrap;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    padding-bottom: 30px;
+    margin-bottom: 40px;
+
+    .greeting {
+      h1 {
+        font-size: 30px;
+        font-weight: 600;
+        background: linear-gradient(90deg, #48dbb1, #28c76f);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        margin-bottom: 8px;
+      }
+
+      p {
+        color: #aab2bf;
+        font-size: 15px;
+      }
+
+      /* ✨ حالة الحساب */
+      .status-banner {
+        margin-top: 14px;
+        padding: 12px 16px;
+        border-radius: 10px;
+        font-size: 14px;
+        line-height: 1.5;
+        font-weight: 500;
+        display: inline-block;
+        backdrop-filter: blur(8px);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        animation: fadeIn 0.6s ease;
+
+        a {
+          color: #48dbb1;
+          font-weight: 600;
+          text-decoration: none;
+          transition: color 0.3s ease, text-shadow 0.3s ease;
+
+          &:hover {
+            color: #6fffc8;
+            text-shadow: 0 0 8px rgba(72, 219, 177, 0.6);
+            text-decoration: underline;
+          }
+        }
+
+        &.active {
+          background: rgba(40, 199, 111, 0.15);
+          color: #28c76f;
+          border-color: rgba(40, 199, 111, 0.3);
+        }
+
+        &.pending {
+          background: rgba(255, 204, 0, 0.15);
+          color: #ffcc00;
+          border-color: rgba(255, 204, 0, 0.25);
+        }
+
+        &.frozen {
+          background: rgba(0, 173, 255, 0.15);
+          color: #45bfff;
+          border-color: rgba(0, 173, 255, 0.25);
+        }
+
+        &.disabled {
+          background: rgba(255, 107, 107, 0.15);
+          color: #ff6b6b;
+          border-color: rgba(255, 107, 107, 0.25);
+        }
+
+        &.closed {
+          background: rgba(255, 255, 255, 0.08);
+          color: #ccc;
+          border-color: rgba(255, 255, 255, 0.1);
+        }
+      }
+    }
+
+    .balance {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 16px;
+      padding: 20px 30px;
+      text-align: right;
+      box-shadow: 0 6px 25px rgba(0, 0, 0, 0.3);
+      backdrop-filter: blur(10px);
+      transition: 0.3s;
+
+      &:hover {
+        transform: translateY(-3px);
+        border-color: rgba(40, 199, 111, 0.4);
+      }
+
+      span {
+        display: block;
+        color: #b8c2cc;
+        font-size: 14px;
+      }
+
+      h2 {
+        color: #28c76f;
+        font-size: 32px;
+        margin: 5px 0 0;
+        font-weight: 700;
+      }
+    }
+  }
+
+  /* 📊 الإحصائيات */
+  .stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 24px;
+    margin-bottom: 50px;
+    position: relative;
+    z-index: 2;
+
+    .card {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.07);
+      border-radius: 16px;
+      padding: 30px 20px;
+      text-align: center;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+      transition: all 0.3s ease;
+
+      &:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 10px 30px rgba(40, 199, 111, 0.25);
+      }
+
+      h3 {
+        color: #aab2bf;
+        font-size: 15px;
+        margin-bottom: 6px;
+      }
+
+      p {
+        font-size: 30px;
+        font-weight: 700;
+      }
+
+      &.completed p {
+        color: #28c76f;
+      }
+
+      &.pending p {
+        color: #ffcc00;
+      }
+    }
+  }
+
+  .recent-transactions {
+    position: relative;
+    z-index: 2;
+    background: rgba(255, 255, 255, 0.04);
+    border-radius: 18px;
+    padding: 35px;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 6px 30px rgba(0, 0, 0, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.07);
+
+    h2 {
+      color: #48dbb1;
+      margin-bottom: 25px;
+      font-size: 22px;
+      font-weight: 600;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
+
+      th,
+      td {
+        padding: 14px 10px;
+        text-align: left;
+      }
+
+      th {
+        color: #a0a0a0;
+        font-weight: 500;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      }
+
+      tbody tr {
+        transition: background 0.2s ease;
+        &:hover {
+          background: rgba(255, 255, 255, 0.05);
+        }
+      }
+
+      .status {
+        padding: 5px 12px;
+        border-radius: 8px;
+        font-size: 13px;
+        font-weight: 600;
+        text-transform: capitalize;
+
+        &.completed {
+          background: rgba(40, 199, 111, 0.15);
+          color: #28c76f;
+        }
+
+        &.pending {
+          background: rgba(255, 204, 0, 0.15);
+          color: #ffcc00;
+        }
+
+        &.reversed {
+          background: rgba(255, 107, 107, 0.15);
+          color: #ff6b6b;
+        }
+      }
+    }
+
+    .no-data {
+      text-align: center;
+      color: #bbb;
+      padding: 30px 0;
+    }
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(-8px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
+:host ::ng-deep .status-banner a,
+:host ::ng-deep .status-banner .support-link {
+  color: #4efcb4 !important; /* أخضر فاتح واضح */
+  font-weight: 600;
+  text-decoration: none;
+  transition: color 0.3s ease, text-shadow 0.3s ease;
+}
+
+/* ✨ تأثير اللمعان عند المرور بالماوس */
+:host ::ng-deep .status-banner a:hover,
+:host ::ng-deep .status-banner .support-link:hover {
+  color: #7dffd2 !important;
+  text-shadow: 0 0 8px rgba(72, 219, 177, 0.7);
+  text-decoration: underline;
+}
+
+/* 🟥 لو الحالة Disabled أو Closed — خلي اللون أحمر */
+:host ::ng-deep .status-banner.disabled a,
+:host ::ng-deep .status-banner.closed a {
+  color: #ff6b6b !important;
+}
+
+:host ::ng-deep .status-banner.disabled a:hover,
+:host ::ng-deep .status-banner.closed a:hover {
+  color: #ff8585 !important;
+  text-shadow: 0 0 8px rgba(255, 107, 107, 0.7);
+  text-decoration: underline;
+}
