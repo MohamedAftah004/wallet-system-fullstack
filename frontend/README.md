@@ -27,34 +27,6 @@ It follows a **modular feature-based structure**, making it scalable, maintainab
 
 ---
 
-## 📂 Project Structure
-
-frontend/
-│
-├── src/
-│ ├── app/
-│ │ ├── core/ # Shared services, interceptors, guards
-│ │ ├── layout/ # Layout components (Sidebar, Navbar)
-│ │ ├── modules/ # Feature modules (Auth, Users, Wallets, Transactions)
-│ │ ├── pages/ # Page-level components
-│ │ ├── shared/ # Reusable UI components
-│ │ ├── app.component.ts
-│ │ └── app-routing.module.ts
-│ │
-│ ├── assets/ # Static files (images, logos, etc.)
-│ ├── environments/ # environment.ts (API URLs, keys)
-│ └── styles/ # Global SCSS styles
-│
-├── angular.json
-├── package.json
-├── tsconfig.json
-└── README.md
-
-pgsql
-Copy code
-
----
-
 ## 🧰 Features
 
 ### 👤 **User Portal**
