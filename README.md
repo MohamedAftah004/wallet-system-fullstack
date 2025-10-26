@@ -1,6 +1,6 @@
 # 💎 Wallet System — Full Stack Application
 
-A complete **Digital Wallet Platform** built using **.NET 9 (Clean Architecture)**, **Angular 20**, and **PostgreSQL 20**.  
+A complete **Digital Wallet Platform** built using **.NET 8 (Clean Architecture)**, **Angular 20**, and **PostgreSQL 17**.  
 It demonstrates a modern full-stack architecture featuring **secure authentication**, **wallet management**, **transaction tracking**, and **admin dashboards**.
 
 ---
@@ -23,7 +23,7 @@ The solution follows **Clean Architecture** with **CQRS + MediatR**, ensuring sc
 | Layer              | Technology                                  |
 | ------------------ | ------------------------------------------- |
 | **Frontend**       | Angular 20, SCSS, TypeScript                |
-| **Backend**        | .NET 9, Clean Architecture, MediatR, EFCore |
+| **Backend**        | .NET 8, Clean Architecture, MediatR, EFCore |
 | **Database**       | PostgreSQL 17                               |
 | **Authentication** | JWT (JSON Web Tokens)                       |
 | **ORM**            | Entity Framework Core                       |
@@ -37,7 +37,7 @@ The solution follows **Clean Architecture** with **CQRS + MediatR**, ensuring sc
 ```
 wallet-system/
 │
-├── backend/                 # .NET 9 Clean Architecture API
+├── backend/                 # .NET 8 Clean Architecture API
 │   ├── Wallet.Api
 │   ├── Wallet.Application
 │   ├── Wallet.Domain
@@ -64,7 +64,7 @@ Restore the database using **pgAdmin** or CLI:
 pg_restore -U postgres -d WalletDb "database/WalletDb.backup"
 ```
 
-### ⚙️ 2️⃣ Run Backend (.NET 9 API)
+### ⚙️ 2️⃣ Run Backend (.NET 8 API)
 
 ```bash
 cd backend/Wallet.Api
